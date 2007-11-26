@@ -4,7 +4,7 @@
 
 InnoDB is pretty stable and reliable storage engine, but even it could be corrupted in case of hardware failure or human mistakes. For example, you could have a failures in your RAID controller (duet to cabling) or memory errors or someone could do “DELETE FROM some_table” and you’ll lose your data.
 
-In many cases innodb’s internal recovery code could not handle such problems and the only way to recover data is to work with innodb tablespaces directly. This is what you can do with our innodb recovery toolkit (toolkit later in this document).
+In many cases innodb’s internal recovery code could not handle such problems and the only way to recover data is to work with innodb tablespaces directly. This is what you can do with our Data Recovery Toolkit for InnoDB (toolkit later in this document).
 
 
 = Tools Overview =
@@ -198,7 +198,7 @@ When `table_defs.h` file is ready, you can proceed with the toolset compilation 
 
 = Toolset Compilation Procedure =
 
-As mentioned before, in release 0.1 of the toolset you need to compile your own binaries to use our toolkit. Internally our toolset uses some low-level InnoDB code pieces to work with pages and fields in tablespaces. That is why we ship trimmed down version of mysql sources with our project (`mysql-source` directory). 
+As mentioned before, in release 0.1 of the toolkit you need to compile your own binaries to use our toolkit. Internally our toolset uses some low-level InnoDB code pieces to work with pages and fields in tablespaces. That is why we ship trimmed down version of mysql sources with our project (`mysql-source` directory). 
 
 We tried to make build process as simple as possible so after you have `table_defs.h` file created you can just run `make` and you should be done with building. If you'll get any problems, most possible they would be in mysql-sources building process. In this case you can just download mysql sources from [MySQL site](http://www.mysql.com), configure and build mysql as following:
 
