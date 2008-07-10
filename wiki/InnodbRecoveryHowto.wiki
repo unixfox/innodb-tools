@@ -14,8 +14,8 @@ Described toolkit consists of a set of useful tools for innodb recovery such as:
   * **`constraints_parser`** - this tool takes some tablespace or any other file and tries to find your data in this file considering it as a part of real innodb tablespace.  
   * **`create_defs.pl`** - this tool uses your database server login/password to create table definitions for your database so these definitions could be used with constraints parser.
   * **`split_dump.pl`** - this tool splits constraints_parser tool output to a set of separate CSV files. 
-  * **`show_data_dictionary`** (to be done in v.0.2+) - this tool tries to read and display innodb global data dictionary for a specified tablespace file.
-  * **`checksum_tablespace`** (to be done in v.0.2+) - this tool tries to read an innodb tablespace and calculate its checksum to check if file is corrupted. 
+  * **`show_data_dictionary`** (to be done in v.1.0+) - this tool tries to read and display innodb global data dictionary for a specified tablespace file.
+  * **`checksum_tablespace`** (to be done in v.1.0+) - this tool tries to read an innodb tablespace and calculate its checksum to check if file is corrupted. 
 
 
 = Pre-recovery Tablespace Processing =
