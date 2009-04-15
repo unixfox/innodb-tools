@@ -6,6 +6,9 @@ InnoDB is pretty stable and reliable storage engine, but even it could be corrup
 
 In many cases innodb’s internal recovery code could not handle such problems and the only way to recover data is to work with innodb tablespaces directly. This is what you can do with our Data Recovery Toolkit for InnoDB (toolkit later in this document).
 
+Other interesting reading:
+
+  * http://www.chriscalender.com/?p=49
 
 = Tools Overview =
 
