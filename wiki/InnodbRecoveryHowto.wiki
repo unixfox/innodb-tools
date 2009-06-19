@@ -9,6 +9,7 @@ In many cases innodb’s internal recovery code could not handle such problems a
 Other interesting reading:
 
   * http://www.chriscalender.com/?p=49
+  * http://www.percona.tv/?p=19 -> Three-part screencast
 
 = Tools Overview =
 
