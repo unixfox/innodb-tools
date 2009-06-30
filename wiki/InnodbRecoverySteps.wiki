@@ -27,9 +27,9 @@ There could be several issues from which you may need data recovery:
 == Recovery steps ==
 Recovery consists of the following steps, not all of which must take place:
   * Getting a hold of an accurate table schema.
-  * Splitting shared tablespace file.
   * Getting hold of tablespace file(s). Do this as soon as possible after the destroying event. The longer this step is delayed, the less chance data can be fully recovered.
-  * Knowing where your data resides withing the tablespace. This is easy when using innodb_file_per_table, and requires more work (possibly guesswork) when using single tablespace.
+  * Splitting shared tablespace file.
+  * Knowing where your data resides withing the tablespace.
   * Isolating table's tablespace data.
   * Recovering tablespace data. This is the core of the recovery process. It is in this step that you must apply your knowledge of the data to refine the recovery results. This step is often performed repeatedly until results are refined. The result of this step is a tab-delimited format of your data.
   * Importing tab-delimited format back into table. Done with standard LOAD DATA INFILE.
