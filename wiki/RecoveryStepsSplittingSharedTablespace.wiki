@@ -1,4 +1,4 @@
-#summary Splitting shared tablespace file
+#summary Recovery steps: Splitting shared tablespace file
 
 = Splitting the shared tablespace =
 
