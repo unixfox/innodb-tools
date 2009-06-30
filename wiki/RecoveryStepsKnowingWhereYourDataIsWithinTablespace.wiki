@@ -47,6 +47,8 @@ We're looking for the sakila/film table, and specifically for its PRIMARY KEY de
 }}}
 The *0 250* part will tell us where in the split pages this table data resides. It translates to the *0-250* path in the split pages directory (as created by `page_parser`).
 
+=== Finding the pages ===
+
 Following our example, we need to be looking at:
 {{{
 [root@test innodb-recovery-0.3]# ls -l pages-1246354779/0-250/
