@@ -26,7 +26,7 @@ Wait for a few seconds, then look at the MySQL error log. A summary of the outpu
 ...
 TABLE: name sakila/film, id 0 125, columns 17, indexes 4, appr.rows 0
   COLUMNS: film_id: DATA_INT len 2 prec 0; title: type 12 len 765 prec 0; description: type 5 len 10 prec 0; release_year: DATA_INT len 1 prec 0; language_id: DATA_INT len 1 prec 0; original_language_id: DATA_INT len 1 prec 0; rental_duration: DATA_INT len 1 prec 0; rental_rate: type 3 len 2 prec 0; length: DATA_INT len 2 prec 0; replacement_cost: type 3 len 3 prec 0; rating: DATA_INT len 1 prec 0; special_features: DATA_INT len 1 prec 0; last_update: DATA_INT len 4 prec 0; DB_ROW_ID: DATA_SYS prtype 256 len 6 prec 0; DB_TRX_ID: DATA_SYS prtype 257 len 6 prec 0; DB_ROLL_PTR: DATA_SYS prtype 258 len 7 prec 0;
-  INDEX: name PRIMARY, id 0 250, fields 1/15, type 3
+  INDEX: name PRIMARY, id *0 250*, fields 1/15, type 3
    root page 57, appr.key vals 0, leaf pages 1, size pages 1
    FIELDS:  film_id DB_TRX_ID DB_ROLL_PTR title description release_year language_id original_language_id rental_duration rental_rate length replacement_cost rating special_features last_update
   INDEX: name idx_title, id 0 251, fields 1/2, type 0
@@ -40,4 +40,3 @@ TABLE: name sakila/film, id 0 125, columns 17, indexes 4, appr.rows 0
    FIELDS:  original_language_id film_id
 ...
 }}}
-
