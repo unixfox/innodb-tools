@@ -2,7 +2,7 @@
 
 === Doing some damage ===
 
-To give a damage example, we'll use the sakila database. We will TRUNCATE the film table, and try to recover.
+To give a damage example, we'll use the sakila database. We will `TRUNCATE` the film table, and try to recover.
 The example uses `innodb_file_per_table=0`.
 
 {{{
