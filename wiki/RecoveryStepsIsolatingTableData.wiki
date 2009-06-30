@@ -1,0 +1,14 @@
+#summary Isolating table's tablespace data.
+
+=== Isolating the data ===
+
+If you're using `innodbfile_per_table`, you can skip this step. Your data resides within the `.ibd` file. It is a tablespace of its own, and it is isolated.
+
+Once we've identified the pages which contain our table's data, we wish to merge them into a single file.
+Merging should be done by proper ordering. Back to our example:
+
+{{{
+[root@test innodb-recovery-0.3]# cd pages-1246354779/0-250/
+[root@test 0-250]# ls -1 *.page | sort -n | xargs cat > /tmp/film_data
+[root@test7 0-250]# cd -
+}}}
