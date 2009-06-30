@@ -4,7 +4,7 @@
 
 If you're using `innodbfile_per_table`, you can skip this step. Your data resides within the `.ibd` file. It is a tablespace of its own.
 
-In our example, we used shared tablespace. We wish to learn where, withing the shared tablespace, the data of our `film` table resides.
+In our example, we used shared tablespace. We wish to learn where, withing the shared tablespace, the data of our `customer` table resides.
 
 
 === Asking for InnoDB info ===
@@ -17,7 +17,7 @@ mysql> CREATE TABLE `innodb_table_monitor` (`id` int(11) default NULL) ENGINE=In
 Query OK, 0 rows affected (0.01 sec)
 }}}
 
-Wait for a few seconds, then look at the MySQL error log. A summary of the output we're looking for follows:
+(If the table already exists, DROP then CREATE again). Wait for a few seconds, then look at the MySQL error log. A summary of the output we're looking for follows:
 {{{
 ===========================================
 090630  2:14:33 INNODB TABLE MONITOR OUTPUT
