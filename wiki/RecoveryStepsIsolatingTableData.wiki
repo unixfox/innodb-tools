@@ -12,3 +12,7 @@ Merging should be done by proper ordering. Back to our example:
 [root@test 0-250]# ls -1 *.page | sort -n | xargs cat > /tmp/film_data
 [root@test7 0-250]# cd -
 }}}
+
+The file {{{/tmp/film/data}}} w
+
+At this stage we are done with the first stage: getting your tablespace data.
