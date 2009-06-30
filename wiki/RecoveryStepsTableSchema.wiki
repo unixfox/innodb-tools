@@ -1,0 +1,9 @@
+#summary Recovery steps: getting a hold on your table schema
+
+This is pretty straight forward. You need to get the CREATE TABLE definition, a .frm file, or a very good memory :).
+
+The result of any of the above should be that you must have an existing table in your database.
+If the damage done was something like DELETE/UPDATE/TRUCNATE - the table's still there, so not a problem.
+If you've used DROP TABLE, you'll have to restore from backup.
+
+There is no need for data now. Just make sure you have the correct table definition.
