@@ -13,4 +13,4 @@ Exactly what _is_ your tablespace depends on your settings.
 The tools work offline the MySQL server. They work directly on the tablespace file. It is therefore important to have a quite file, to which no one writes. Best to copy it somehow aside. There are a few options for that:
   * Taking a snapshot (LVM; FS based; appliance based).
   * Setting `innodb_fast_shutdown`; taking MySQL down; copying the tablespace file(s).
-  * Use Google Patches v2, `SET GLOBAL innodb_disallow_writes=1`, then copy tablespace file(s).
+  * Using Google Patches v2, `SET GLOBAL innodb_disallow_writes=1`, then copy tablespace file(s).
