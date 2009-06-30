@@ -20,7 +20,10 @@ There could be several issues from which you may need data recovery:
   * A mistaken UPDATE t SET c=''; _Ooops, forgot WHERE condition_
   * etc.
 
-= Recovery steps =
+== Installation steps ==
+  * Getting hold of the code: code is available for download from [http://code.google.com/p/innodb-tools/ InnoDB Tools project home page]. Extract the files.
+
+== Recovery steps ==
 Recovery consists of the following steps, not all of which must take place:
   * Getting a hold of an accurate table schema. Without the proper table schema, recovery is not possible.
   * Getting hold of tablespace file(s). Do this as soon as possible after the destroying event. The longer this step is delayed, the less chance data can be fully recovered.
