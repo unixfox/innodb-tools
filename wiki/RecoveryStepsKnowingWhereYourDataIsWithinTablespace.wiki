@@ -69,3 +69,5 @@ total 300
 -rw-r--r-- 1 root root 16384 Jun 30 02:39 75-00000057.page
 -rw-r--r-- 1 root root 16384 Jun 30 02:39 76-00000580.page
 }}}
+
+Next: [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsIsolatingTableData Isolating table's tablespace data]
