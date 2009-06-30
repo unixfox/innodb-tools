@@ -21,7 +21,8 @@ There could be several issues from which you may need data recovery:
   * etc.
 
 == Installation steps ==
-  * Getting hold of the code: code is available for download from [http://code.google.com/p/innodb-tools/ InnoDB Tools project home page]. Extract the files.
+  * Getting hold of the code: code is available for download from [http://code.google.com/p/innodb-tools/ InnoDB Tools project home page]. 
+  * Follow these rules.
 
 == Recovery steps ==
 Recovery consists of the following steps, not all of which must take place:
