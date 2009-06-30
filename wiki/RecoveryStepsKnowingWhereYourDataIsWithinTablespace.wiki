@@ -45,4 +45,25 @@ We're looking for the sakila/film table, and specifically for its PRIMARY KEY de
 {{{
   INDEX: name PRIMARY, id 0 250, fields 1/15, type 3
 }}}
-The *0 250* part will tell us where in the split pages this table data resides.
+The *0 250* part will tell us where in the split pages this table data resides. It translates to the *0-250* path in the split pages directory (as created by `page_parser`).
+
+Following our example, we need to be looking at:
+{{{
+[root@test innodb-recovery-0.3]# ls -l pages-1246354779/0-250/
+total 300
+-rw-r--r-- 1 root root 16384 Jun 30 02:39 57-00000057.page
+-rw-r--r-- 1 root root 16384 Jun 30 02:39 580-00000580.page
+-rw-r--r-- 1 root root 16384 Jun 30 02:39 619-00000619.page
+-rw-r--r-- 1 root root 16384 Jun 30 02:39 620-00000620.page
+-rw-r--r-- 1 root root 16384 Jun 30 02:39 621-00000621.page
+-rw-r--r-- 1 root root 16384 Jun 30 02:39 622-00000622.page
+-rw-r--r-- 1 root root 16384 Jun 30 02:39 623-00000623.page
+-rw-r--r-- 1 root root 16384 Jun 30 02:39 624-00000624.page
+-rw-r--r-- 1 root root 16384 Jun 30 02:39 625-00000625.page
+-rw-r--r-- 1 root root 16384 Jun 30 02:39 626-00000626.page
+-rw-r--r-- 1 root root 16384 Jun 30 02:39 629-00000629.page
+-rw-r--r-- 1 root root 16384 Jun 30 02:39 630-00000630.page
+-rw-r--r-- 1 root root 16384 Jun 30 02:39 631-00000631.page
+-rw-r--r-- 1 root root 16384 Jun 30 02:39 75-00000057.page
+-rw-r--r-- 1 root root 16384 Jun 30 02:39 76-00000580.page
+}}}
