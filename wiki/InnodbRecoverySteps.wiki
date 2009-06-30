@@ -6,6 +6,10 @@ This is a breaking of the recovery process into distinct, isolated steps; not al
 
 
 = Recovery types =
-
+There could be several issues from which you may need data recovery:
+  * A mistaken DROP TABLE t
+  * A mistaken DELETE FROM t
+  * A mistaken TRUNCATE TABLE t
+  * A mistaken UPDATE t SET ... _Ooops, forgot WHERE condition_
 
 = Recovery steps =
