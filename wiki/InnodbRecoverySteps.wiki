@@ -40,3 +40,5 @@ The above steps consist of three main stages:
   # Importing data back to table.
 
 Let's look at each of these steps in more detail.
+
+Next: [http://code.google.com/p/innodb-tools/wiki/InnodbToolsSetup InnoDB tools setup]
