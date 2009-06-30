@@ -29,10 +29,10 @@ Recovery consists of the following steps, not all of which must take place:
   * Getting a hold of an accurate table schema.
   * Getting hold of tablespace file(s). Do this as soon as possible after the destroying event. The longer this step is delayed, the less chance data can be fully recovered.
   * Splitting shared tablespace file.
-  * Knowing where your data resides withing the tablespace.
-  * Isolating table's tablespace data.
+  * [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsKnowingWhereYourDataIsWithinTablespace Knowing where your data resides withing the tablespace].
+  * [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsIsolatingTableData Isolating table's tablespace data].
   * [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsPreparingCodeForRecovery Preparing the code for recovery].
-  * Recovering tablespace data. This is the core of the recovery process. It is in this step that you must apply your knowledge of the data to refine the recovery results. This step is often performed repeatedly until results are refined. The result of this step is a tab-delimited format of your data.
+  * [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsRecoveringTablespaceData Recovering tablespace data]. This is the core of the recovery process. It is in this step that you must apply your knowledge of the data to refine the recovery results. This step is often performed repeatedly until results are refined. The result of this step is a tab-delimited format of your data.
   * Importing tab-delimited format back into table. Done with standard LOAD DATA INFILE.
 
 The above steps consist of three main stages: 
