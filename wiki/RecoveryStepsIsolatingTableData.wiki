@@ -1,4 +1,4 @@
-#summary Isolating table's tablespace data
+#summary Recovery steps: isolating table's tablespace data
 
 === Isolating the data ===
 
