@@ -13,6 +13,6 @@ Merging should be done by proper ordering. Back to our example:
 [root@test7 0-250]# cd -
 }}}
 
-The file {{{/tmp/film/data}}} w
+The file `/tmp/film/data` contains our data, and will provide input to the constraints parser. Users of `innodb_file_per_table` will use the `.ibd` file instead.
 
 At this stage we are done with the first stage: getting your tablespace data.
