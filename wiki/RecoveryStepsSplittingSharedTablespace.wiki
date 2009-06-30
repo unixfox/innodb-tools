@@ -39,3 +39,5 @@ Read page #0.. saving it to pages-1246354779/0-0/1640-00000000.page
 
 The *-5* option stands for MySQL 5 (with COMPACT format). For MySQL < 5, use *-4*.
 The result of this utility is the pages split from the shared tablespace file. Some of these pages contain our data. Others are irrelevant for our purposes.
+
+Next: [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsKnowingWhereYourDataIsWithinTablespace Knowing where your data resides withing the tablespace]
