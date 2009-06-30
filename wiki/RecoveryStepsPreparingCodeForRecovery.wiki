@@ -1,7 +1,12 @@
 #summary Recovery steps: Preparing the code for recovery
 
-== Preparign the code ==
+== Preparing the code ==
 
 Recovery tools works in such way that the table schema is converted to a C structure. In fact, it is at current the user's responsibility to generate the header file.
+In particular, the expected header file is `include/table_defs.h`
 
-This is done with the `create_defs` script. Use 
+This is done with the `create_defs` script. Use:
+
+{{{
+[root@test innodb-recovery-0.3]# ./create_defs.pl --host=localhost --user=root --password=****** --db=sakila --table=customer > include/table_defs.h 
+}}}
