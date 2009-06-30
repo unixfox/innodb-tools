@@ -155,3 +155,5 @@ table_def_t table_definitions[] = {
 }}}
 
 Note that this is a translation of the table format into what InnoDB Tools use internally as a C program.
+
+You may need to edit this file later on, to force some constraints on the recovered data.
