@@ -1,0 +1,7 @@
+#summary Recovery steps: Preparing the code for recovery
+
+== Preparign the code ==
+
+Recovery tools works in such way that the table schema is converted to a C structure. In fact, it is at current the user's responsibility to generate the header file.
+
+This is done with the `create_defs` script. Use 
