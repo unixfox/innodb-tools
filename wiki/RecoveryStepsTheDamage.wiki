@@ -3,6 +3,7 @@
 === Doing some damage ===
 
 To give a damage example, we'll use the sakila database. We will TRUNCATE the film table, and try to recover.
+The example uses `innodb_file_per_table=0`.
 
 {{{
 mysql> SELECT COUNT(*) FROM film;
@@ -23,6 +24,16 @@ mysql> SELECT * FROM film LIMIT 4;
 |       4 | AFFAIR PREJUDICE | A Fanciful Documentary of a Frisbee And a Lumberjack who must Chase a Monkey in A Shark Tank         |         2006 |           1 |                 NULL |               5 |        2.99 |    117 |            26.99 | G      | Commentaries,Behind the Scenes   | 2006-02-15 05:03:42 | 
 +---------+------------------+------------------------------------------------------------------------------------------------------+--------------+-------------+----------------------+-----------------+-------------+--------+------------------+--------+----------------------------------+---------------------+
 4 rows in set (0.00 sec)
-
-
 }}}
+
+And...
+
+{{{
+mysql> SET foreign_key_checks=0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> TRUNCATE TABLE film;
+Query OK, 968 rows affected (0.00 sec)
+}}}
+
+Damage done.
