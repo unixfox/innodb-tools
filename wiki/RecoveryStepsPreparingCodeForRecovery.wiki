@@ -11,6 +11,8 @@ This is done with the `create_defs` script. Use:
 [root@test innodb-recovery-0.3]# ./create_defs.pl --host=localhost --user=root --password=****** --db=sakila --table=customer > include/table_defs.h 
 }}}
 
+== Looking at the header file ==
+
 The result file should look something like:
 {{{
 #ifndef table_defs_h
