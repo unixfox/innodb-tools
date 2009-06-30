@@ -31,6 +31,7 @@ Recovery consists of the following steps, not all of which must take place:
   * Splitting shared tablespace file.
   * Knowing where your data resides withing the tablespace.
   * Isolating table's tablespace data.
+  * Preparing the code for recovery.
   * Recovering tablespace data. This is the core of the recovery process. It is in this step that you must apply your knowledge of the data to refine the recovery results. This step is often performed repeatedly until results are refined. The result of this step is a tab-delimited format of your data.
   * Importing tab-delimited format back into table. Done with standard LOAD DATA INFILE.
 
