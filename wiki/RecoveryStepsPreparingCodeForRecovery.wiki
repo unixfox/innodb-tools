@@ -10,3 +10,148 @@ This is done with the `create_defs` script. Use:
 {{{
 [root@test innodb-recovery-0.3]# ./create_defs.pl --host=localhost --user=root --password=****** --db=sakila --table=customer > include/table_defs.h 
 }}}
+
+The result file should look something like:
+{{{
+#ifndef table_defs_h
+#define table_defs_h
+
+// Table definitions
+table_def_t table_definitions[] = {
+        {
+                name: "customer",
+                {
+                        { /* smallint(5) unsigned */
+                                name: "customer_id",
+                                type: FT_UINT,
+                                fixed_length: 2,
+
+                                has_limits: TRUE,
+                                limits: {
+                                        can_be_null: FALSE,
+                                        uint_min_val: 0,
+                                        uint_max_val: 65535
+                                },
+
+                                can_be_null: FALSE
+                        },
+                        { /*  */
+                                name: "DB_TRX_ID",
+                                type: FT_INTERNAL,
+                                fixed_length: 6,
+
+                                can_be_null: FALSE
+                        },
+                        { /*  */
+                                name: "DB_ROLL_PTR",
+                                type: FT_INTERNAL,
+                                fixed_length: 7,
+
+                                can_be_null: FALSE
+                        },
+                        { /* tinyint(3) unsigned */
+                                name: "store_id",
+                                type: FT_UINT,
+                                fixed_length: 1,
+
+                                has_limits: TRUE,
+                                limits: {
+                                        can_be_null: FALSE,
+                                        uint_min_val: 0,
+                                        uint_max_val: 255
+                                },
+
+                                can_be_null: FALSE
+                        },
+                        { /* varchar(45) */
+                                name: "first_name",
+                                type: FT_CHAR,
+                                min_length: 0,
+                                max_length: 45,
+
+                                has_limits: TRUE,
+                                limits: {
+                                        can_be_null: FALSE,
+                                        char_min_len: 0,
+                                        char_max_len: 45,
+                                        char_ascii_only: TRUE
+                                },
+
+                                can_be_null: FALSE
+                        },
+                        { /* varchar(45) */
+                                name: "last_name",
+                                type: FT_CHAR,
+                                min_length: 0,
+                                max_length: 45,
+
+                                has_limits: TRUE,
+                                limits: {
+                                        can_be_null: FALSE,
+                                        char_min_len: 0,
+                                        char_max_len: 45,
+                                        char_ascii_only: TRUE
+                                },
+
+                                can_be_null: FALSE
+                        },
+                        { /* varchar(50) */
+                                name: "email",
+                                type: FT_CHAR,
+                                min_length: 0,
+                                max_length: 50,
+
+                                has_limits: TRUE,
+                                limits: {
+                                        can_be_null: TRUE,
+                                        char_min_len: 0,
+                                        char_max_len: 50,
+                                        char_ascii_only: TRUE
+                                },
+
+                                can_be_null: TRUE
+                        },
+                        { /* smallint(5) unsigned */
+                                name: "address_id",
+                                type: FT_UINT,
+                                fixed_length: 2,
+
+                                has_limits: TRUE,
+                                limits: {
+                                        can_be_null: FALSE,
+                                        uint_min_val: 0,
+                                        uint_max_val: 65535
+                                },
+
+                                can_be_null: FALSE
+                        },
+                        { /* tinyint(1) */
+                                name: "active",
+                                type: FT_INT,
+                                fixed_length: 1,
+
+                                can_be_null: FALSE
+                        },
+                        { /* datetime */
+                                name: "create_date",
+                                type: FT_DATETIME,
+                                fixed_length: 8,
+
+                                can_be_null: FALSE
+                        },
+                        { /* timestamp */
+                                name: "last_update",
+                                type: FT_UINT,
+                                fixed_length: 4,
+
+                                can_be_null: FALSE
+                        },
+                        { type: FT_NONE }
+                }
+        },
+};
+
+#endif
+}}}
+
+Note that this is a translation of the table format into what InnoDB Tools use internally as a C program.
