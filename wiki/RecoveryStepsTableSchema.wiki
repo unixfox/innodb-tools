@@ -9,3 +9,5 @@ The result of any of the above should be that you must have an existing table in
   * If you've used `DROP TABLE`, you'll have to restore from backup.
 
 There is no need for data now. Just make sure you have the correct table definition. In our example, we only truncated a table - so table definition is still there. Otherwise, create the table anywhere - say, in the `test` schema.
+
+Next: [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsGetHoldOfTablespaceFile getting hold of your tablespace file(s)]
