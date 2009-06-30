@@ -35,8 +35,8 @@ Recovery consists of the following steps, not all of which must take place:
   * Importing tab-delimited format back into table. Done with standard LOAD DATA INFILE.
 
 The above steps consist of three main stages: 
-  # Getting the raw tablespace
-  # Attempting to extract table data
+  # Getting the raw tablespace.
+  # Attempting to extract table data.
   # Importing data back to table.
 
 Let's look at each of these steps in more detail.
