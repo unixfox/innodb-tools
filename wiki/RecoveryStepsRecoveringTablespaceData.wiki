@@ -1,0 +1,13 @@
+#summary Recovery steps: recovering tablespace data
+
+== Building the code ==
+
+As explained earlier, we must build the application against the generate table definition.
+We do so with `make`:
+
+{{{
+[root@test innodb-recovery-0.3]# make
+gcc -DHAVE_OFFSET64_T -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE=1 -D_LARGEFILE_SOURCE=1 -g -I include -I mysql-source/include -I mysql-source/innobase/include -c tables_dict.c -o lib/tables_dict.o
+gcc -DHAVE_OFFSET64_T -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE=1 -D_LARGEFILE_SOURCE=1 -g -I include -I mysql-source/include -I mysql-source/innobase/include -o constraints_parser constraints_parser.c lib/tables_dict.o lib/print_data.o lib/check_data.o lib/libut.a lib/libmystrings.a
+gcc -DHAVE_OFFSET64_T -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE=1 -D_LARGEFILE_SOURCE=1 -g -I include -I mysql-source/include -I mysql-source/innobase/include -o page_parser page_parser.c lib/tables_dict.o lib/libut.a
+}}}
