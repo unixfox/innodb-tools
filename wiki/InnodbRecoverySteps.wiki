@@ -5,7 +5,7 @@
 This is a breaking of the recovery process into distinct, isolated steps; not all steps are always performed; not all steps are always performed in the same manner.
 In this doc we will relate to a single table data recovery.
 
-= A few notes =
+== A few notes ==
   * The InnoDB Tools only work for InnoDB/XtraDB tables.
   * There is no guarantee. Even with perfect tools, data is sometimes unrecoverable. For example, data that is overwritten cannot be recovered with these tools. There may be file system specific or physical means to recover overwritten data. This is outside the scope of this project.
   * Time is crucial. Best chances are when acting the moment things have gone wrong.
