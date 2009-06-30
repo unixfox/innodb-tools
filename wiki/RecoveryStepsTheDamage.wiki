@@ -2,7 +2,7 @@
 
 === Doing some damage ===
 
-To give a damage example, we'll use the sakila database. We will `TRUNCATE` the customer table, and try to recover.
+To give a damage example, we'll use the [http://dev.mysql.com/doc/sakila/en/sakila.html sakila database]. We will `TRUNCATE` the customer table, and try to recover.
 The example uses `innodb_file_per_table=0`.
 
 {{{
