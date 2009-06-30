@@ -3,13 +3,24 @@
 = Introduction =
 
 This is a breaking of the recovery process into distinct, isolated steps; not all steps are always performed; not all steps are always performed in the same manner.
+In this doc we will relate to a single table data recovery.
 
+= A few notes =
+  * The InnoDB Tools only work for InnoDB/XtraDB tables.
+  * There is no guarantee. Even with perfect tools, data is sometimes unrecoverable. For example, data that is overwritten cannot be recovered with these tools. There may be file system specific or physical means to recover overwritten data. This is outside the scope of this project.
+  * Time is crucial. Best chances are when acting the moment things have gone wrong.
+  * There is manual work to do. Not everything is automatic.
+  * Recovery depends on you being familiar with your data. As part of the process you may have to choose between two variations of data. The better you know your code, the more chances you'll get good recovery.
 
 = Recovery types =
 There could be several issues from which you may need data recovery:
   * A mistaken DROP TABLE t
   * A mistaken DELETE FROM t
   * A mistaken TRUNCATE TABLE t
-  * A mistaken UPDATE t SET ... _Ooops, forgot WHERE condition_
+  * A mistaken UPDATE t SET c=''; _Ooops, forgot WHERE condition_
+  * etc.
 
 = Recovery steps =
+Recovery consists of the following steps, not all of which must take place:
+  * Getting a hold of an accurate table schema. Without the proper table schema, recovery is not possible.
+  * Getting hold of tablespace file(s). Do this as soon as possible after the destroying event. The longer this step is delayed, the less chance data can be fully recovered.
