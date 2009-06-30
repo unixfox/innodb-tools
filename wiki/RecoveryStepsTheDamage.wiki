@@ -2,28 +2,30 @@
 
 === Doing some damage ===
 
-To give a damage example, we'll use the sakila database. We will `TRUNCATE` the film table, and try to recover.
+To give a damage example, we'll use the sakila database. We will `TRUNCATE` the customer table, and try to recover.
 The example uses `innodb_file_per_table=0`.
 
 {{{
-mysql> SELECT COUNT(*) FROM film;
+mysql> SELECT COUNT(*) FROM customer;
 +----------+
 | COUNT(*) |
 +----------+
-|     1000 | 
+|      599 | 
 +----------+
 1 row in set (0.00 sec)
 
-mysql> SELECT * FROM film LIMIT 4;
-+---------+------------------+------------------------------------------------------------------------------------------------------+--------------+-------------+----------------------+-----------------+-------------+--------+------------------+--------+----------------------------------+---------------------+
-| film_id | title            | description                                                                                          | release_year | language_id | original_language_id | rental_duration | rental_rate | length | replacement_cost | rating | special_features                 | last_update         |
-+---------+------------------+------------------------------------------------------------------------------------------------------+--------------+-------------+----------------------+-----------------+-------------+--------+------------------+--------+----------------------------------+---------------------+
-|       1 | ACADEMY DINOSAUR | A Epic Drama of a Feminist And a Mad Scientist who must Battle a Teacher in The Canadian Rockies     |         2006 |           1 |                 NULL |               6 |        0.99 |     86 |            20.99 | PG     | Deleted Scenes,Behind the Scenes | 2006-02-15 05:03:42 | 
-|       2 | ACE GOLDFINGER   | A Astounding Epistle of a Database Administrator And a Explorer who must Find a Car in Ancient China |         2006 |           1 |                 NULL |               3 |        4.99 |     48 |            12.99 | G      | Trailers,Deleted Scenes          | 2006-02-15 05:03:42 | 
-|       3 | ADAPTATION HOLES | A Astounding Reflection of a Lumberjack And a Car who must Sink a Lumberjack in A Baloon Factory     |         2006 |           1 |                 NULL |               7 |        2.99 |     50 |            18.99 | NC-17  | Trailers,Deleted Scenes          | 2006-02-15 05:03:42 | 
-|       4 | AFFAIR PREJUDICE | A Fanciful Documentary of a Frisbee And a Lumberjack who must Chase a Monkey in A Shark Tank         |         2006 |           1 |                 NULL |               5 |        2.99 |    117 |            26.99 | G      | Commentaries,Behind the Scenes   | 2006-02-15 05:03:42 | 
-+---------+------------------+------------------------------------------------------------------------------------------------------+--------------+-------------+----------------------+-----------------+-------------+--------+------------------+--------+----------------------------------+---------------------+
-4 rows in set (0.00 sec)
+mysql> SELECT * FROM customer LIMIT 6;
++-------------+----------+------------+-----------+-------------------------------------+------------+--------+---------------------+---------------------+
+| customer_id | store_id | first_name | last_name | email                               | address_id | active | create_date         | last_update         |
++-------------+----------+------------+-----------+-------------------------------------+------------+--------+---------------------+---------------------+
+|           1 |        1 | MARY       | SMITH     | MARY.SMITH@sakilacustomer.org       |          5 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 | 
+|           2 |        1 | PATRICIA   | JOHNSON   | PATRICIA.JOHNSON@sakilacustomer.org |          6 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 | 
+|           3 |        1 | LINDA      | WILLIAMS  | LINDA.WILLIAMS@sakilacustomer.org   |          7 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 | 
+|           4 |        2 | BARBARA    | JONES     | BARBARA.JONES@sakilacustomer.org    |          8 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 | 
+|           5 |        1 | ELIZABETH  | BROWN     | ELIZABETH.BROWN@sakilacustomer.org  |          9 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 | 
+|           6 |        2 | JENNIFER   | DAVIS     | JENNIFER.DAVIS@sakilacustomer.org   |         10 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 | 
++-------------+----------+------------+-----------+-------------------------------------+------------+--------+---------------------+---------------------+
+6 rows in set (0.00 sec)
 }}}
 
 And...
@@ -32,8 +34,8 @@ And...
 mysql> SET foreign_key_checks=0;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> TRUNCATE TABLE film;
-Query OK, 968 rows affected (0.00 sec)
+mysql> TRUNCATE TABLE customer;
+Query OK, 541 rows affected (0.00 sec)
 }}}
 
 Damage done.
