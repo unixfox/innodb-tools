@@ -1,4 +1,4 @@
-#summary Knowing where your data resides withing the tablespace
+#summary Recovery steps: Knowing where your data resides withing the tablespace
 
 == Locating the data ==
 
