@@ -26,9 +26,9 @@ There could be several issues from which you may need data recovery:
 
 == Recovery steps ==
 Recovery consists of the following steps, not all of which must take place:
-  * Getting a hold of an accurate table schema.
-  * Getting hold of tablespace file(s). Do this as soon as possible after the destroying event. The longer this step is delayed, the less chance data can be fully recovered.
-  * Splitting shared tablespace file.
+  * [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsTableSchema Getting a hold of an accurate table schema].
+  * [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsGetHoldOfTablespaceFile Getting hold of tablespace file(s)]. Do this as soon as possible after the destroying event. The longer this step is delayed, the less chance data can be fully recovered.
+  * [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsSplittingSharedTablespace Splitting shared tablespace file].
   * [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsKnowingWhereYourDataIsWithinTablespace Knowing where your data resides withing the tablespace].
   * [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsIsolatingTableData Isolating table's tablespace data].
   * [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsPreparingCodeForRecovery Preparing the code for recovery].
