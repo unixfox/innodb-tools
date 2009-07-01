@@ -33,7 +33,7 @@ Recovery consists of the following steps, not all of which must take place:
   * [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsIsolatingTableData Isolating table's tablespace data].
   * [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsPreparingCodeForRecovery Preparing the code for recovery].
   * [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsRecoveringTablespaceData Recovering tablespace data]. This is the core of the recovery process. It is in this step that you must apply your knowledge of the data to refine the recovery results. This step is often performed repeatedly until results are refined. The result of this step is a tab-delimited format of your data.
-  * Importing tab-delimited format back into table. Done with standard LOAD DATA INFILE.
+  * [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsImportDataIntoTable Importing tab-delimited format back into table]. Done with standard LOAD DATA INFILE.
 
 The above steps consist of three main stages: 
   # Getting the raw tablespace.
