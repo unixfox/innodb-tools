@@ -43,4 +43,4 @@ Create Table: CREATE TABLE `customer` (
 1 row in set (0.00 sec)
 }}}
 
-Next: [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsGetHoldOfTablespaceFile getting hold of your tablespace file(s)]
+Next: [RecoveryStepsGetHoldOfTablespaceFile getting hold of your tablespace file(s)]
