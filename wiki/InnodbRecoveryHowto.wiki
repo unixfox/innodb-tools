@@ -233,3 +233,170 @@ Now, let's get to data recovery process. Recommended (really detailed) sequence 
 If you have no tables with an identical structure and you're pretty confident about your table definitions, you can recover your data from your tablespace data directly.
 
 If you are getting a lot of junk records in your `constraints_parser` output, try to set more limits in your definitions file so parser would know how to filter out these false positives.
+
+
+= Hints =
+
+=== Using filters ===
+
+The tool scans a page with a byte step. With each iteration it checks whether a row is valid.
+There are two tests:
+ * check_for_a_record() - Checks whether the candidate record has valid structure: ORIGIN, field sizes, etc. This is defined in table_defs.h file.
+ * check_constraints() - If the structure of the record is OK, checks whether data conform given limits. Have a look at piece of table_defs.h below. There is a section "limits" - here you can set the maximum and minimum values for integers, min/max string length.
+
+If the tests are not passed the seek position is shifted on one byte. If the tests are OK the position is shifted on the size of record. It should be noted if junk record is found that means a good one is lost.
+
+Use as narrow filters as possible. For example, PRIMARY KEY is declared as int(11) signed, however the key starts from 1. So instead of 
+
+{{{
+                        { /* int(11) */
+                                name: "id",
+                                type: FT_INT,
+                                fixed_length: 4,
+
+                                has_limits: TRUE,
+                                limits: {
+                                        can_be_null: FALSE,
+                                        int_min_val: -2147483648LL,
+                                        int_max_val: 2147483647LL
+                                },
+
+                                can_be_null: FALSE
+                        },
+}}}
+Use
+{{{
+			{ /* int(11) */
+                                name: "id",
+                                type: FT_INT,
+                                fixed_length: 4,
+
+                                has_limits: TRUE,
+                                limits: {
+                                        can_be_null: FALSE,
+                                        int_min_val: 1,
+                                        int_max_val: 2147483647LL
+                                },
+
+                                can_be_null: FALSE
+                        },
+}}}
+Try to play around with maximum varchar lenght. If you know your string doesn't exceed 20 symbols set this as the char_max_len.
+
+=== Compilation ===
+  * ~~>It was observed the tool can't find anything on x86_64 architecture.~~ (Fixed in **r61** (2008-09-13))
+  * before 5.0.3 DECIMAL(M, D) requires 
+      * M+2 bytes, if D > 0
+      * M+1 bytes, if D = 0
+      * D+2, if M < D 
+create_defs.pl generates code appicable to >5.0.3 , so sorrect the table_defs.h :
+{{{
+                        { /* decimal(4,2) unsigned */
+                                name: "working_hours",
+                                type: FT_CHAR,
+                                fixed_length: 6,
+
+                                has_limits: FALSE,
+                                limits: {
+                                        can_be_null: TRUE,
+                                        char_min_len: 0,
+                                        char_max_len: 2,
+                                        char_ascii_only: TRUE
+                                },
+
+                                can_be_null: TRUE
+                        },
+}}}
+* On Linux you may get comilation error saying there is no isnumber() function in check_data.c
+The matter is isnumber() comes from BSD world however C standard defines isdigit() function. Just change the name.
+* BLOBs are not supported. But if your blob fields have no binary data and one record fits in a page (16k), you can try a trick:
+
+{{{
+create_defs.pl:
+
+  sub FindFieldByName($$) {
+  	my $fields = shift;
+  	my $name = shift;
+@@ -333,7 +346,7 @@
+  		return { type => 'FT_TEXT', min_len => 0, max_len => 255 };
+  	}
+
+-	if ($type =~ /^TEXT$/i) {
++	if ($type =~ /^TEXT|BLOB$/i) {
+  		return { type => 'FT_TEXT', min_len => 0, max_len => 65535 };
+  	}
+}}}
+
+=== Using the tool ===
+  * The tool requires to specify the version of MySQL. If you don't know there are ways to find out.
+  - The tool knows itself :) Run constraints_parser in debug mode (-V) and if your guess was wrong it will tell you: "Page is in COMPACT format while we're looking for REDUNDANT - skipping" or "Page is in REDUNDANT format while we're looking for COMPACT - skipping"
+  - Run
+<code>dc -e "2o `hexdump –C d pagefile | grep 00000020 | awk '{ print $12}'` p" | sed 's/./& /g' | awk '{ print $1}'</code>
+0 stands for version 4, 1 - for 5
+
+  * Although in the table_defs.h can be defined all tables from you database it is better if you use own table_defs.h per table.
+  * If the tool finds nothing but you see your data it is useful to run it in debug mode.
+Let's say you have found a string "abcd" in a page.
+Your table_defs.h is:
+{{{
+                      { /* int(11) */
+                                name: "id",
+                                type: FT_INT,
+                                fixed_length: 4,
+
+                                has_limits: TRUE,
+                                limits: {
+                                        can_be_null: FALSE,
+                                        int_min_val: 1,
+                                        int_max_val: 100000
+                                },
+
+                                can_be_null: FALSE
+                        },
+                        { /*  */
+                                name: "DB_TRX_ID",
+                                type: FT_INTERNAL,
+                                fixed_length: 6,
+
+                                can_be_null: FALSE
+                        },
+                        { /*  */
+                                name: "DB_ROLL_PTR",
+                                type: FT_INTERNAL,
+                                fixed_length: 7,
+
+                                can_be_null: FALSE
+                        },
+                        { /* varchar(100) */
+                                name: "name",
+                                type: FT_CHAR,
+                                min_length: 0,
+                                max_length: 100,
+
+                                has_limits: TRUE,
+                                limits: {
+                                        can_be_null: TRUE,
+                                        char_min_len: 0,
+                                        char_max_len: 100,
+                                        char_ascii_only: TRUE
+                                },
+
+                                can_be_null: TRUE
+                        },
+}}}
+Before your "abcd" there are 4+6+7 = 17 bytes. The place where data begin is called ORIGIN. You find the origin in hex editor. Then looking for the offset equal to the origin in the debug output. Then you'll see why your record isn't found.
+ 
+  * Of course you don't know index id when you recover data. There are way how to find out.
+  - A table is identified by index id. So all pages of the same table are in one directory
+  - If there are VARCHARS or CHARS in the table and you know possible values you can grep all tablespace to find your index id:
+{{{
+# grep -r "XXX-yyyy-ZzZz" pages-1217332715/
+Binary file pages-1217332715/0-276/1116-00001116.page matches
+Binary file pages-1217332715/0-276/596-00000596.page matches
+Binary file pages-1217332715/0-276/715-00000715.page matches
+Binary file pages-1217332715/0-276/1119-00001119.page matches
+Binary file pages-1217332715/0-276/1237-00001237.page matches
+Binary file pages-1217332715/0-276/1101-00001101.page matches
+Binary file pages-1217332715/0-276/709-00000709.page matches
+#
+}}}
