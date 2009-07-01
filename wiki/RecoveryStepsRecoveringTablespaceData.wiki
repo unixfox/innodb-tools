@@ -71,3 +71,95 @@ customer        0       0       ""      ""      ""      0       0       "7679-35
 }}}
 
 Some of this data is good; some is obviously garbage. And some should take careful attention.
+
+== Revisiting table_defs.h ==
+
+To try and make sense into the result, we can set constraints on the data. Thsi is done by editing the `include/table_defs.h` file.
+
+Some values above are clearly wrong: knowing our data, we can conclude there's no customer with customer_id `0`, nor is there a customer with an empty `first_name`, etc.
+
+The constraints can be edited, within the `limits {}` clause, per table column. For example:
+
+{{{
+	{ /* smallint(5) unsigned */
+		name: "customer_id",
+		type: FT_UINT,
+		fixed_length: 2,
+
+		has_limits: TRUE,
+		limits: {
+		        can_be_null: FALSE,
+		        uint_min_val: 0,
+		        uint_max_val: 65535
+		},
+
+		can_be_null: FALSE
+	},
+}}}
+
+Can be edited into:
+{{{
+	{ /* smallint(5) unsigned */
+		name: "customer_id",
+		type: FT_UINT,
+		fixed_length: 2,
+
+		has_limits: TRUE,
+		limits: {
+		        can_be_null: FALSE,
+		        uint_min_val: 1,
+		        uint_max_val: 65535
+		},
+
+		can_be_null: FALSE
+	},
+}}}
+
+(Adding the constraint that customer_id must be greater than, or equal, to `1`.
+Also:
+{{{
+        { /* varchar(45) */
+                name: "first_name",
+                type: FT_CHAR,
+                min_length: 0,
+                max_length: 45,
+
+                has_limits: TRUE,
+                limits: {
+                        can_be_null: FALSE,
+                        char_min_len: 0,
+                        char_max_len: 45,
+                        char_ascii_only: TRUE
+                },
+
+                can_be_null: FALSE
+        },
+}}}
+
+Can be changed to:
+{{{
+        { /* varchar(45) */
+                name: "first_name",
+                type: FT_CHAR,
+                min_length: 0,
+                max_length: 45,
+
+                has_limits: TRUE,
+                limits: {
+                        can_be_null: FALSE,
+                        char_min_len: 1,
+                        char_max_len: 45,
+                        char_ascii_only: TRUE
+                },
+
+                can_be_null: FALSE
+        },
+}}}
+
+This last change may not be strict enough. Can there really be a customer with a one-letter first name? The better you know your data, the tighter the constraints you can place, and the better results to get from `constraints_parser`.
+
+It is necessary to run `constraints_parser` again.
+
+In our example:
+{{{
+}}}
