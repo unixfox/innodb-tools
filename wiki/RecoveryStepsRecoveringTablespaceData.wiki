@@ -74,7 +74,7 @@ Some of this data is good; some is obviously garbage. And some should take caref
 
 == Revisiting table_defs.h ==
 
-To try and make sense into the result, we can set constraints on the data. Thsi is done by editing the `include/table_defs.h` file.
+To try and make sense into the result, we can set constraints on the data. This is done by editing the `include/table_defs.h` file.
 
 Some values above are clearly wrong: knowing our data, we can conclude there's no customer with customer_id `0`, nor is there a customer with an empty `first_name`, etc.
 
@@ -115,7 +115,7 @@ Can be edited into:
 	},
 }}}
 
-(Adding the constraint that customer_id must be greater than, or equal, to `1`.
+(Adding the constraint that customer_id must be greater than, or equal, to `1`).
 Also:
 {{{
         { /* varchar(45) */
@@ -160,6 +160,51 @@ This last change may not be strict enough. Can there really be a customer with a
 
 It is necessary to run `constraints_parser` again.
 
+
+== Re-executing the constraints_parser ==
+
+The process repeats itself. We edit the `table_defs.h` file, rebuild, and run the parser again.
+
 In our example:
 {{{
+[root@test innodb-recovery-0.3]# make
+gcc -DHAVE_OFFSET64_T -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE=1 -D_LARGEFILE_SOURCE=1 -g -I include -I mysql-source/include -I mysql-source/innobase/include -c tables_dict.c -o lib/tables_dict.o
+gcc -DHAVE_OFFSET64_T -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE=1 -D_LARGEFILE_SOURCE=1 -g -I include -I mysql-source/include -I mysql-source/innobase/include -c print_data.c -o lib/print_data.o 
+print_data.c:217:2: warning: no newline at end of file
+gcc -DHAVE_OFFSET64_T -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE=1 -D_LARGEFILE_SOURCE=1 -g -I include -I mysql-source/include -I mysql-source/innobase/include -c check_data.c -o lib/check_data.o
+gcc -DHAVE_OFFSET64_T -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE=1 -D_LARGEFILE_SOURCE=1 -g -I include -I mysql-source/include -I mysql-source/innobase/include -o constraints_parser constraints_parser.c lib/tables_dict.o lib/print_data.o lib/check_data.o lib/libut.a lib/libmystrings.a
+gcc -DHAVE_OFFSET64_T -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE=1 -D_LARGEFILE_SOURCE=1 -g -I include -I mysql-source/include -I mysql-source/innobase/include -o page_parser page_parser.c lib/tables_dict.o lib/libut.a
 }}}
+
+Then:
+{{{
+[root@test7 innodb-recovery-0.3]# ./constraints_parser -5 -f /tmp/customer_data 
+}}}
+
+In our example, we actually ran:
+{{{
+[root@test7 innodb-recovery-0.3]# ./constraints_parser -5 -f /tmp/customer_data > /tmp/customer_data.csv
+}}}
+
+Looking at the result file, we find:
+{{{
+customer        1       1       "MARY"  "SMITH" "MARY.SMITH@sakilacustomer.org" 5       1       "2006-02-14 22:04:36"   1140008240
+customer        2       1       "PATRICIA"      "JOHNSON"       "PATRICIA.JOHNSON@sakilacustomer.org"   6       1       "2006-02-14 22:04:36"   1140008240
+customer        3       1       "LINDA" "WILLIAMS"      "LINDA.WILLIAMS@sakilacustomer.org"     7       1       "2006-02-14 22:04:36"   1140008240
+customer        4       2       "BARBARA"       "JONES" "BARBARA.JONES@sakilacustomer.org"      8       1       "2006-02-14 22:04:36"   1140008240
+customer        5       1       "ELIZABETH"     "BROWN" "ELIZABETH.BROWN@sakilacustomer.org"    9       1       "2006-02-14 22:04:36"   1140008240
+customer        6       2       "JENNIFER"      "DAVIS" "JENNIFER.DAVIS@sakilacustomer.org"     10      1       "2006-02-14 22:04:36"   1140008240
+customer        7       1       "MARIA" "MILLER"        "MARIA.MILLER@sakilacustomer.org"       11      1       "2006-02-14 22:04:36"   1140008240
+customer        8       2       "SUSAN" "WILSON"        "SUSAN.WILSON@sakilacustomer.org"       12      1       "2006-02-14 22:04:36"   1140008240
+customer        9       2       "MARGARET"      "MOORE" "MARGARET.MOORE@sakilacustomer.org"     13      1       "2006-02-14 22:04:36"   1140008240
+customer        10      1       "DOROTHY"       "TAYLOR"        "DOROTHY.TAYLOR@sakilacustomer.org"     14      1       "2006-02-14 22:04:36"   1140008240
+customer        11      2       "LISA"  "ANDERSON"      "LISA.ANDERSON@sakilacustomer.org"      15      1       "2006-02-14 22:04:36"   1140008240
+customer        12      1       "NANCY" "THOMAS"        "NANCY.THOMAS@sakilacustomer.org"       16      1       "2006-02-14 22:04:36"   1140008240
+...
+customer        596     1       "ENRIQUE"       "FORSYTHE"      "ENRIQUE.FORSYTHE@sakilacustomer.org"   602     1       "2006-02-14 22:04:37"   1140008240
+customer        597     1       "FREDDIE"       "DUGGAN"        "FREDDIE.DUGGAN@sakilacustomer.org"     603     1       "2006-02-14 22:04:37"   1140008240
+customer        598     1       "WADE"  "DELVALLE"      "WADE.DELVALLE@sakilacustomer.org"      604     1       "2006-02-14 22:04:37"   1140008240
+customer        599     2       "AUSTIN"        "CINTRON"       "AUSTIN.CINTRON@sakilacustomer.org"     605     1       "2006-02-14 22:04:37"   1140008240
+}}}
+
+It looks like all rows have been recoverd correctly.
