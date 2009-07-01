@@ -217,4 +217,4 @@ Rows that have been `DELETE`d may still appear in the result. Run `constraints_p
 
 We are now left with a `CSV` file.
 
-Next: [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsImportDataIntoTable importing tab-delimited data into table]
+Next: [RecoveryStepsImportDataIntoTable importing tab-delimited data into table]
