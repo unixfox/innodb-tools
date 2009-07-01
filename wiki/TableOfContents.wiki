@@ -1,4 +1,4 @@
 #summary Table of Contents
 
-* [InnodbRecoveryHowto InnoDB Tools HOWTO]
-* [InnodbRecoverySteps InnoDB Recovery Steps]
+  * [InnodbRecoveryHowto InnoDB Tools HOWTO]
+  * [InnodbRecoverySteps InnoDB Recovery Steps]
