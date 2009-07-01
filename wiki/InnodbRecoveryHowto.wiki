@@ -404,8 +404,8 @@ Binary file pages-1217332715/0-276/709-00000709.page matches
 Try different strings if there are more than 1 directory is found.
   * If you are you completely unaware what inside the table is or there are only INTs or DATE it is more difficult to find, but possible.
 
-You compile sources with the respective ''table_defs.h''. Make sure it defines only one table. 
-Run the script below. The idea behind is: If the page is good, ''constraints_parser'' will return >0 records.
+You compile sources with the respective `table_defs.h`. Make sure it defines only one table. 
+Run the script below. The idea behind is: If the page is good, `constraints_parser` will return >0 records.
 
 *Please do appropriate changes for your case.*
 {{{
@@ -459,7 +459,7 @@ do
 done
 }}}
 
-    * If you are lucky you'll get only one index id grepping a tablespace beased on known string. What if not. It is clear the longer string the better match. Let's say you have a table ''ordner'':
+    * If you are lucky you'll get only one index id grepping a tablespace beased on known string. What if not. It is clear the longer string the better match. Let's say you have a table `ordner`:
 {{{
 mysql> desc ordner;
 +------------+--------------+------+-----+---------+-------+
@@ -471,10 +471,10 @@ mysql> desc ordner;
 +------------+--------------+------+-----+---------+-------+
 }}}
 
-If you know there is John Smith in the table you can try two strings ''grep -r JohnSmith pages-*''. This will work because there is no ''\0'' after ''John''.
+If you know there is John Smith in the table you can try two strings `grep -r JohnSmith pages-*`. This will work because there is no `\0` after `John`.
 
 === SYS_TABLES and SYS_INDEXES ===
-''SYS_INDEXES'' lays in the index id 0-3
+`SYS_INDEXES` lays in the index id 0-3
 
 {{{
 CREATE TABLE `SYS_INDEXES` (
@@ -489,7 +489,7 @@ CREATE TABLE `SYS_INDEXES` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 }}}
 
-''table_defs.h.SYS_INDEXES''
+`table_defs.h.SYS_INDEXES`
 
 {{{
 #ifndef table_defs_h
@@ -594,7 +594,7 @@ table_def_t table_definitions[] = {
 #endif
 }}}
 
-''SYS_TABLES'' lays in the index_id 0-1
+`SYS_TABLES` lays in the index_id 0-1
 
 {{{
 CREATE TABLE `SYS_TABLES` (
@@ -610,7 +610,7 @@ CREATE TABLE `SYS_TABLES` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 }}}
 
-''table_defs.h.SYS_TABLES''
+`table_defs.h.SYS_TABLES`
 
 {{{
 #ifndef table_defs_h
@@ -739,8 +739,8 @@ As you know the innodb recovery tool requires table definitions file table_def.h
 If a customer can't give CREATE SQL files it's possible to get them from customer's .frm files.
 
   * Say you need t1, t2, t3.
-  * You create tables ''CREATE TABLE t1 (id int) Engine=INNODB;''
-  * Shut down the MySQL server.(not necessary, but if MySQL crashes during ''SHOW CREATE TABLE t1'' it is worth to run with ''innodb_force_recovery=4'')
+  * You create tables `CREATE TABLE t1 (id int) Engine=INNODB;`
+  * Shut down the MySQL server.(not necessary, but if MySQL crashes during `SHOW CREATE TABLE t1` it is worth to run with `innodb_force_recovery=4`)
   * Replace t1.frm, t2.frm and t3.frm with customer's ones.
   * Start MySQL again. Now you can run "show create table t1"
 
@@ -768,7 +768,7 @@ CREATE TABLE `message_comments` (
 ) ENGINE=InnoDB AUTO_INCREMENT=33133 DEFAULT CHARSET=latin1
 }}}
 
-The ''table_defs.h''
+The `table_defs.h`
 {{{
 #ifndef table_defs_h
 #define table_defs_h
