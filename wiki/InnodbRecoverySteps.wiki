@@ -10,7 +10,7 @@ In this doc we will relate to a single table data recovery.
   * There is no guarantee. Even with perfect tools, data is sometimes unrecoverable. For example, data that is overwritten cannot be recovered with these tools. There may be file system specific or physical means to recover overwritten data. This is outside the scope of this project.
   * Time is crucial. Best chances are when acting the moment things have gone wrong.
   * There is manual work to do. Not everything is automatic.
-  * Recovery depends on you being familiar with your data. As part of the process you may have to choose between two variations of data. The better you know your code, the more chances you'll get good recovery.
+  * Recovery depends on you being familiar with your data. As part of the process you may have to choose between two variations of data. The better you know your data, the more chances you'll get good recovery.
 
 === Recovery types ===
 There could be several issues from which you may need data recovery:
