@@ -17,7 +17,7 @@ There could be several issues from which you may need data recovery:
   * A mistaken `DROP TABLE t`
   * A mistaken `DELETE FROM t`
   * A mistaken `TRUNCATE TABLE t`
-  * A mistaken `UPDATE t SET c=''`; _Ooops, forgot WHERE condition_
+  * A mistaken `UPDATE t SET c='some value meant for single row'`; _Ooops, forgot WHERE condition_
   * etc.
 
 == Installation steps ==
