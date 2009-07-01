@@ -207,4 +207,14 @@ customer        598     1       "WADE"  "DELVALLE"      "WADE.DELVALLE@sakilacus
 customer        599     2       "AUSTIN"        "CINTRON"       "AUSTIN.CINTRON@sakilacustomer.org"     605     1       "2006-02-14 22:04:37"   1140008240
 }}}
 
-It looks like all rows have been recoverd correctly.
+It looks like all rows have been recovered correctly.
+
+In other cases, an `UPDATE` may have been performed on the table, prior to damage, which would result in two rows with the same customer_id. We have created the merged file in such way that later updates appear later in the file. But should you want to recover from that `UPDATE`, it is up to your understanding of your data to know which of the two rows (or more) is to be removed.
+
+Rows that have been `DELETE`d may still appear in the result. Run `constraints_parser` with the *-D* option to only view deleted rows. then manually (or build your own script) remove them from the results.
+
+== Results ==
+
+We are now left with a `CSV` file.
+
+Next:
