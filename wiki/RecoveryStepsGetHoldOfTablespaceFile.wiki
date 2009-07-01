@@ -15,4 +15,4 @@ The tools work offline the MySQL server. They work directly on the tablespace fi
   * Setting `innodb_fast_shutdown`; taking MySQL down; copying the tablespace file(s).
   * Using Google Patches v2, `SET GLOBAL innodb_disallow_writes=1`, then copy tablespace file(s).
 
-Next: [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsSplittingSharedTablespace Splitting shared tablespace file]
+Next: [RecoveryStepsSplittingSharedTablespace Splitting shared tablespace file]
