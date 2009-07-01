@@ -178,12 +178,12 @@ gcc -DHAVE_OFFSET64_T -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE=1 -D_LARGEFIL
 
 Then:
 {{{
-[root@test7 innodb-recovery-0.3]# ./constraints_parser -5 -f /tmp/customer_data 
+[root@test innodb-recovery-0.3]# ./constraints_parser -5 -f /tmp/customer_data 
 }}}
 
 In our example, we actually ran:
 {{{
-[root@test7 innodb-recovery-0.3]# ./constraints_parser -5 -f /tmp/customer_data > /tmp/customer_data.csv
+[root@test innodb-recovery-0.3]# ./constraints_parser -5 -f /tmp/customer_data > /tmp/customer_data.csv
 }}}
 
 Looking at the result file, we find:
