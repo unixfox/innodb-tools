@@ -17,4 +17,4 @@ The file `/tmp/customer_data` contains our data, and will provide input to the c
 
 At this stage we are done with the first stage: getting your tablespace data.
 
-Next: [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsPreparingCodeForRecovery Preparing the code for recovery]
+Next: [RecoveryStepsPreparingCodeForRecovery Preparing the code for recovery]
