@@ -1,4 +1,5 @@
 #summary Table of Contents
+[TableOfContents Table of Contents]
 
   * [InnodbRecoveryHowto InnoDB Tools HOWTO]
   * [InnodbRecoverySteps InnoDB Recovery Steps]
