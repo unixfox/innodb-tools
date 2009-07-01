@@ -22,18 +22,18 @@ There could be several issues from which you may need data recovery:
 
 == Installation steps ==
   * Getting hold of the code: code is available for download from [http://code.google.com/p/innodb-tools/ InnoDB Tools project home page]. 
-  * Follow [http://code.google.com/p/innodb-tools/wiki/InnodbToolsSetup these rules].
+  * Follow [InnodbToolsSetup these rules].
 
 == Recovery steps ==
 Recovery consists of the following steps, not all of which must take place:
-  * [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsTableSchema Getting a hold of an accurate table schema].
-  * [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsGetHoldOfTablespaceFile Getting hold of tablespace file(s)]. Do this as soon as possible after the destroying event. The longer this step is delayed, the less chance data can be fully recovered.
-  * [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsSplittingSharedTablespace Splitting shared tablespace file].
-  * [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsKnowingWhereYourDataIsWithinTablespace Knowing where your data resides withing the tablespace].
-  * [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsIsolatingTableData Isolating table's tablespace data].
-  * [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsPreparingCodeForRecovery Preparing the code for recovery].
-  * [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsRecoveringTablespaceData Recovering tablespace data]. This is the core of the recovery process. It is in this step that you must apply your knowledge of the data to refine the recovery results. This step is often performed repeatedly until results are refined. The result of this step is a tab-delimited format of your data.
-  * [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsImportDataIntoTable Importing tab-delimited format back into table]. Done with standard LOAD DATA INFILE.
+  * [RecoveryStepsTableSchema Getting a hold of an accurate table schema].
+  * [RecoveryStepsGetHoldOfTablespaceFile Getting hold of tablespace file(s)]. Do this as soon as possible after the destroying event. The longer this step is delayed, the less chance data can be fully recovered.
+  * [RecoveryStepsSplittingSharedTablespace Splitting shared tablespace file].
+  * [RecoveryStepsKnowingWhereYourDataIsWithinTablespace Knowing where your data resides withing the tablespace].
+  * [RecoveryStepsIsolatingTableData Isolating table's tablespace data].
+  * [RecoveryStepsPreparingCodeForRecovery Preparing the code for recovery].
+  * [RecoveryStepsRecoveringTablespaceData Recovering tablespace data]. This is the core of the recovery process. It is in this step that you must apply your knowledge of the data to refine the recovery results. This step is often performed repeatedly until results are refined. The result of this step is a tab-delimited format of your data.
+  * [RecoveryStepsImportDataIntoTable Importing tab-delimited format back into table]. Done with standard LOAD DATA INFILE.
 
 The above steps consist of three main stages: 
   # Getting the raw tablespace.
@@ -41,8 +41,8 @@ The above steps consist of three main stages:
   # Importing data back to table.
 
 == Ongoing example ==
-These docs will use a recovery example, described [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsTheDamage here].
+These docs will use a recovery example, described [RecoveryStepsTheDamage here].
 
 Let's look at each of these steps in more detail.
 
-Next: [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsTheDamage sample damage]
+Next: [RecoveryStepsTheDamage sample damage]
