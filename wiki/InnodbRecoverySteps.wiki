@@ -44,4 +44,5 @@ The above steps consist of three main stages:
 These docs will use a recovery example, described [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsTheDamage here].
 
 Let's look at each of these steps in more detail.
+
 Next: [http://code.google.com/p/innodb-tools/wiki/RecoveryStepsTheDamage sample damage]
