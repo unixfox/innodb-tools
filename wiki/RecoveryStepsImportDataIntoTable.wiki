@@ -12,5 +12,13 @@ The following holds when issuing the `LOAD DATA INFILE` command on the `constrai
 
 In our example:
 {{{
+	LOAD DATA INFILE '/tmp/customer_data.csv'
+	REPLACE INTO TABLE customer
+	FIELDS TERMINATED BY '\t'
+	OPTIONALLY ENCLOSED BY '"'
+	LINES STARTING BY 'customer\t'
+	(customer_id, store_id, first_name, last_name, email, address_id, active, @var1, @var2)
+	SET
+	  create_date = FROM_UNIXTIME(@var1),
+	  last_update = FROM_UNIXTIME(@var2);
 }}}
-
