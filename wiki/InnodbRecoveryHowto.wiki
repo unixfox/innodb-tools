@@ -821,7 +821,7 @@ table_def_t table_definitions[] = {
 #endif
 
 
-===== Loading data to mysql =====
+=== Loading data to mysql ===
 
 **This example can be useful when you need to do conversion during data loading for example**
 
@@ -836,5 +836,4 @@ SET
   datefield1 = FROM_UNIXTIME(@var1),
   datefield2 = FROM_UNIXTIME(@var2,'%Y %D %M %h:%i:%s %x');
 
-}}}
 }}}
