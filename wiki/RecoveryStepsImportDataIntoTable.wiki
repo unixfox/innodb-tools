@@ -1,12 +1,16 @@
 #summary Recovery steps: importing tab-delimited data into table
-= Introduction =
 
-Add your content here.
+== Importing data ==
 
+Importing data is the last step, and it does not involve InnoDB Recovery Tools. Imporintg is done with the MySQL `LOAD DATA INFILE` command.
 
-= Details =
+The following holds when issuing the `LOAD DATA INFILE` command on the `constraints_parser` output:
+  * CSV (name misleading) is tab delimited. Use: `FIELDS TERMINATED BY '\t'`
+  * Text is quoted. Use: `OPTIONALLY ENCLOSED BY '"'`
+  * Each line starts with the table name. Use: `LINES STARTING BY '<table_name>\t'`
+  * TIMESTAMP values are stored as integer values. Use: `FROM_UNIXTIME(@var)`, where @var is the placeholder of the timestamp column.
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+In our example:
+{{{
+}}}
+
