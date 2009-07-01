@@ -400,3 +400,441 @@ Binary file pages-1217332715/0-276/1101-00001101.page matches
 Binary file pages-1217332715/0-276/709-00000709.page matches
 #
 }}}
+
+Try different strings if there are more than 1 directory is found.
+  * If you are you completely unaware what inside the table is or there are only INTs or DATE it is more difficult to find, but possible.
+
+You compile sources with the respective ''table_defs.h''. Make sure it defines only one table. 
+Run the script below. The idea behind is: If the page is good, ''constraints_parser'' will return >0 records.
+
+*Please do appropriate changes for your case.*
+{{{
+#!/bin/sh
+
+f=`find pages-1217332715 -name *.page`
+
+for i in $f
+do
+        n=`./constraints_parser -4f $i | wc -l`
+        if [ $n -gt 0 ]
+        then
+                echo $i
+        fi
+done
+}}}
+It shows the pages which may have records of your table.
+
+  * If there are many table to recover this script may help you
+{{{
+#!/bin/sh
+
+db=epic
+
+tables=`mysql -u root -e "SHOW TABLES" -s $db`
+
+for i in $tables
+do
+        #Check how many rows has a table
+        rows=`mysql -u root -e "SELECT COUNT(*) FROM $i" -s $db`
+        if [ $rows -ne 0 ]
+        then
+                # Prepare environment
+                echo "Restoring table $i"
+                table=$i
+                cd include && rm -f table_defs.h && ln -s table_defs.h.$table table_defs.h
+                cd ..
+                make clean all
+                # Restoring rows
+                found=0
+                while [ $found -lt 1 ]
+                do
+                        echo ""
+                        read -p "Enter the path to directory where data of table $i might be: " dir
+                        cat $dir/*.page > p
+                        ./constraints_parser -4 -f p >> out.$i
+                        found=`cat out.$i | wc -l`
+                done
+
+        fi
+done
+}}}
+
+    * If you are lucky you'll get only one index id grepping a tablespace beased on known string. What if not. It is clear the longer string the better match. Let's say you have a table ''ordner'':
+{{{
+mysql> desc ordner;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| id         | int(11)      | NO   | PRI |         |       |
+| first_name | varchar(255) | YES  |     | NULL    |       |
+| last_name  | varchar(255) | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+}}}
+
+If you know there is John Smith in the table you can try two strings ''grep -r JohnSmith pages-*''. This will work because there is no ''\0'' after ''John''.
+
+=== SYS_TABLES and SYS_INDEXES ===
+''SYS_INDEXES'' lays in the index id 0-3
+
+{{{
+CREATE TABLE `SYS_INDEXES` (
+  `TABLE_ID` bigint(20) unsigned NOT NULL default '0',
+  `ID` bigint(20) unsigned NOT NULL default '0',
+  `NAME` varchar(120) default NULL,
+  `N_FIELDS` int(10) unsigned default NULL,
+  `TYPE` int(10) unsigned default NULL,
+  `SPACE` int(10) unsigned default NULL,
+  `PAGE_NO` int(10) unsigned default NULL,
+  PRIMARY KEY  (`TABLE_ID`,`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+}}}
+
+''table_defs.h.SYS_INDEXES''
+
+{{{
+#ifndef table_defs_h
+#define table_defs_h
+
+// Table definitions
+table_def_t table_definitions[] = {
+        {
+                name: "SYS_INDEXES",
+                {
+                        { /* bigint(20) unsigned */
+                                name: "TABLE_ID",
+                                type: FT_UINT,
+                                fixed_length: 8,
+
+                                has_limits: TRUE,
+                                limits: {
+                                        can_be_null: FALSE,
+                                        uint_min_val: 0,
+                                        uint_max_val: 18446744073709551615ULL
+                                },
+
+                                can_be_null: FALSE
+                        },
+                        { /* bigint(20) unsigned */
+                                name: "ID",
+                                type: FT_UINT,
+                                fixed_length: 8,
+
+                                has_limits: TRUE,
+                                limits: {
+                                        can_be_null: FALSE,
+                                        uint_min_val: 0,
+                                        uint_max_val: 18446744073709551615ULL
+                                },
+
+                                can_be_null: FALSE
+                        },
+                        { /*  */
+                                name: "DB_TRX_ID",
+                                type: FT_INTERNAL,
+                                fixed_length: 6,
+
+                                can_be_null: FALSE
+                        },
+                        { /*  */
+                                name: "DB_ROLL_PTR",
+                                type: FT_INTERNAL,
+                                fixed_length: 7,
+
+                                can_be_null: FALSE
+                        },
+                        { /* varchar(120) */
+                                name: "NAME",
+                                type: FT_CHAR,
+                                min_length: 0,
+                                max_length: 120,
+
+                                has_limits: TRUE,
+                                limits: {
+                                        can_be_null: TRUE,
+                                        char_min_len: 0,
+                                        char_max_len: 120,
+                                        char_ascii_only: TRUE
+                                },
+
+                                can_be_null: TRUE
+                        },
+                        { /* int(10) unsigned */
+                                name: "N_FIELDS",
+                                type: FT_UINT,
+                                fixed_length: 4,
+
+                                can_be_null: TRUE
+                        },
+                        { /* int(10) unsigned */
+                                name: "TYPE",
+                                type: FT_UINT,
+                                fixed_length: 4,
+
+                                can_be_null: TRUE
+                        },
+                        { /* int(10) unsigned */
+                                name: "SPACE",
+                                type: FT_UINT,
+                                fixed_length: 4,
+
+                                can_be_null: TRUE
+                        },
+                        { /* int(10) unsigned */
+                                name: "PAGE_NO",
+                                type: FT_UINT,
+                                fixed_length: 4,
+
+                                can_be_null: TRUE
+                        },
+                        { type: FT_NONE }
+                }
+        },
+};
+
+#endif
+}}}
+
+''SYS_TABLES'' lays in the index_id 0-1
+
+{{{
+CREATE TABLE `SYS_TABLES` (
+  `NAME` varchar(255) NOT NULL default '',
+  `ID` bigint(20) unsigned NOT NULL default '0',
+  `N_COLS` int(10) unsigned default NULL,
+  `TYPE` int(10) unsigned default NULL,
+  `MIX_ID` bigint(20) unsigned default NULL,
+  `MIX_LEN` int(10) unsigned default NULL,
+  `CLUSTER_NAME` varchar(255) default NULL,
+  `SPACE` int(10) unsigned default NULL,
+  PRIMARY KEY  (`NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+}}}
+
+''table_defs.h.SYS_TABLES''
+
+{{{
+#ifndef table_defs_h
+#define table_defs_h
+
+// Table definitions
+table_def_t table_definitions[] = {
+        {
+                name: "SYS_TABLES",
+                {
+                        { /* varchar(255) */
+                                name: "NAME",
+                                type: FT_CHAR,
+                                min_length: 0,
+                                max_length: 255,
+
+                                has_limits: TRUE,
+                                limits: {
+                                        can_be_null: FALSE,
+                                        char_min_len: 0,
+                                        char_max_len: 255,
+                                        char_ascii_only: TRUE
+                                },
+
+                                can_be_null: FALSE
+                        },
+                        { /*  */
+                                name: "DB_TRX_ID",
+                                type: FT_INTERNAL,
+                                fixed_length: 6,
+
+                                can_be_null: FALSE
+                        },
+                        { /*  */
+                                name: "DB_ROLL_PTR",
+                                type: FT_INTERNAL,
+                                fixed_length: 7,
+
+                                can_be_null: FALSE
+                        },
+                        { /* bigint(20) unsigned */
+                                name: "ID",
+                                type: FT_UINT,
+                                fixed_length: 8,
+
+                                has_limits: TRUE,
+                                limits: {
+                                        can_be_null: FALSE,
+                                        uint_min_val: 0,
+                                        uint_max_val: 18446744073709551615ULL
+                                },
+
+                                can_be_null: FALSE
+                        },
+                        { /* int(10) unsigned */
+                                name: "N_COLS",
+                                type: FT_UINT,
+                                fixed_length: 4,
+
+                                can_be_null: TRUE
+                        },
+                        { /* int(10) unsigned */
+                                name: "TYPE",
+                                type: FT_UINT,
+                                fixed_length: 4,
+
+                                can_be_null: TRUE
+                        },
+                        { /* bigint(20) unsigned */
+                                name: "MIX_ID",
+                                type: FT_UINT,
+                                fixed_length: 8,
+
+                                has_limits: TRUE,
+                                limits: {
+                                        can_be_null: TRUE,
+                                        uint_min_val: 0,
+                                        uint_max_val: 18446744073709551615ULL
+                                },
+
+                                can_be_null: TRUE
+                        },
+                        { /* int(10) unsigned */
+                                name: "MIX_LEN",
+                                type: FT_UINT,
+                                fixed_length: 4,
+
+                                can_be_null: TRUE
+                        },
+                        { /* varchar(255) */
+                                name: "CLUSTER_NAME",
+                                type: FT_CHAR,
+                                min_length: 0,
+                                max_length: 255,
+
+                                has_limits: TRUE,
+                                limits: {
+                                        can_be_null: TRUE,
+                                        char_min_len: 0,
+                                        char_max_len: 255,
+                                        char_ascii_only: TRUE
+                                },
+
+                                can_be_null: TRUE
+                        },
+                        { /* int(10) unsigned */
+                                name: "SPACE",
+                                type: FT_UINT,
+                                fixed_length: 4,
+
+                                can_be_null: TRUE
+                        },
+                        { type: FT_NONE }
+                }
+        },
+};
+
+#endif
+}}}
+
+Both tables are in redundant format
+
+=== How to get CREATE info from .frm files ===
+As you know the innodb recovery tool requires table definitions file table_def.h. Tho most convenient way to generate it is to use the respective perl script create_defs.pl . For this you need a live , possibly empty database of tables you want to recover.
+
+If a customer can't give CREATE SQL files it's possible to get them from customer's .frm files.
+
+  * Say you need t1, t2, t3.
+  * You create tables ''CREATE TABLE t1 (id int) Engine=INNODB;''
+  * Shut down the MySQL server.(not necessary, but if MySQL crashes during ''SHOW CREATE TABLE t1'' it is worth to run with ''innodb_force_recovery=4'')
+  * Replace t1.frm, t2.frm and t3.frm with customer's ones.
+  * Start MySQL again. Now you can run "show create table t1"
+
+=== How to recover NON Primary Key ===
+Usually you need the primary key only. Indeed, if there are other keys in a table you can rebuild them when you have data.
+I case you can't recover PK(pages lost, overwritten...) some information which may be usefull can be restored from non-primary key.
+An InnoDB page is the same format whether this is primary key or not. The non-PK page contains tuples (key, PK). Its index_id can be found in SYS_TABLES/SYS_INDEXES.
+
+So all you have to do is to prepare table_defs.h in respect to index structure.
+
+Here is an example.
+
+The table:
+{{{
+CREATE TABLE `message_comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `message_id` int(11) NOT NULL DEFAULT '0',
+  `author_id` int(11) NOT NULL DEFAULT '0',
+  `body` text,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `attachments_count` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `index_message_comments_on_message_id_and_created_at` (`message_id`,`created_at`)
+) ENGINE=InnoDB AUTO_INCREMENT=33133 DEFAULT CHARSET=latin1
+}}}
+
+The ''table_defs.h''
+{{{
+#ifndef table_defs_h
+#define table_defs_h
+
+// Table definitions
+table_def_t table_definitions[] = {
+        {
+                name: "index_message_comments_on_message_id_and_created_at",
+                {
+                        { /* int(11) */
+                                name: "message_id",
+                                type: FT_INT,
+                                fixed_length: 4,
+
+                                has_limits: TRUE,
+                                limits: {
+                                        can_be_null: FALSE,
+                                        int_min_val: -2147483648LL,
+                                        int_max_val: 2147483647LL
+                                },
+
+                                can_be_null: FALSE
+                        },
+                        { /* datetime */
+                                name: "created_at",
+                                type: FT_DATETIME,
+                                fixed_length: 8,
+
+                                can_be_null: TRUE
+                        },
+                        { /* int(11) */
+                                name: "id",
+                                type: FT_INT,
+                                fixed_length: 4,
+
+                                has_limits: TRUE,
+                                limits: {
+                                        can_be_null: FALSE,
+                                        int_min_val: -2147483648LL,
+                                        int_max_val: 2147483647LL
+                                },
+
+                                can_be_null: FALSE
+                        },
+                        { type: FT_NONE }
+                }
+        },
+};
+
+#endif
+
+
+===== Loading data to mysql =====
+
+**This example can be useful when you need to do conversion during data loading for example**
+
+{{{
+LOAD DATA INFILE '/path/to/datafile'
+REPLACE INTO TABLE <table_name>
+FIELDS TERMINATED BY '\t'
+OPTIONALLY ENCLOSED BY '"'
+LINES STARTING BY '<table_name>\t'
+(id,sessionid,uniqueid,username,nasipaddress,@var1,@var2,etc)
+SET
+  datefield1 = FROM_UNIXTIME(@var1),
+  datefield2 = FROM_UNIXTIME(@var2,'%Y %D %M %h:%i:%s %x');
+
+}}}
+}}}
