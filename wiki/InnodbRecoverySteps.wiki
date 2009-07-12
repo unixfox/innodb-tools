@@ -1,4 +1,5 @@
 #summary InnoDB data recovery process explained
+#labels Featured
 
 = Introduction =
 
