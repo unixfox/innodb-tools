@@ -156,6 +156,8 @@ Can be changed to:
         },
 }}}
 
+See [ConstraintsTypes Types of constraints] for detailed listing of constraints.
+
 This last change may not be strict enough. Can there really be a customer with a one-letter first name? The better you know your data, the tighter the constraints you can place, and the better results to get from `constraints_parser`.
 
 It is necessary to run `constraints_parser` again.
