@@ -17,20 +17,29 @@ Following is a list of available constraints, per field type.
 
 === Type: INT ===
   * INT allows for the following constraints:
-    `int_min_val`
-    `int_max_val`
+{{{
+    int_min_val
+    int_max_val
+}}}
     e.g.:
-    `int_min_val: 1`
-    `int_max_val: 12345`
+{{{
+    int_min_val: 1,
+    int_max_val: 12345,
+    ...
+}}}
 
 === Type: INT UNSIGNED ===
   * INT UNSIGNED allows for the following constraints:
-    `uint_min_val`
-    `uint_max_val`
+{{{
+    uint_min_val
+    uint_max_val
+}}}
     e.g.:
-    `uint_min_val: 1`
-    `uint_max_val: 65535`
-
+{{{
+    uint_min_val: 1,
+    uint_max_val: 65535,
+    ...
+}}}
 
 = Details =
 
