@@ -46,6 +46,9 @@ Following is a list of available constraints, per field type.
   * `constraints_parser` automatically validates data for those types.
   * There is currently no manual constraint.
 
+=== Type: TIMESTAMP ===
+  * Internally represented as UINT.
+
 === Type: CHAR/TEXT ===
   * CHAR, VARCHAR types and TEXT variants have the following constraints:
   {{{
