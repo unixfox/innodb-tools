@@ -2,7 +2,7 @@
 
 == Introduction ==
 
-The `constraints_parser` application parses a tablespace file, eliminates invalid data, and produces a tab delimited file, ready for import using LOAD DATA INFILE. The step is described in [RecoveryStepsRecoveringTablespaceData Recovering tablespace data].
+The `constraints_parser` application parses a tablespace file, eliminates invalid data, and produces a tab delimited file, ready for import using `LOAD DATA INFILE`. The step is described in [RecoveryStepsRecoveringTablespaceData Recovering tablespace data].
 
 Constraints/limits are defined in the `include/table_def.h` file.
 
