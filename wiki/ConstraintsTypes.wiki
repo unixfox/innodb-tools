@@ -22,7 +22,7 @@ INT allows for the following constraints:
     int_min_val
     int_max_val
 }}}
-e.g.:
+*Examples:*
 {{{
     int_min_val: 1,
     int_max_val: 12345,
@@ -35,7 +35,7 @@ INT UNSIGNED allows for the following constraints:
     uint_min_val
     uint_max_val
 }}}
-e.g.:
+*Examples:*
 {{{
     uint_min_val: 1,
     uint_max_val: 65535,
@@ -46,13 +46,6 @@ e.g.:
 `constraints_parser` automatically validates data for those types.
 There is currently no manual constraint.
 
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
-
 === Type: CHAR/TEXT ===
 CHAR, VARCHAR types and TEXT variants have the following constraints:
 {{{
@@ -60,5 +53,29 @@ CHAR, VARCHAR types and TEXT variants have the following constraints:
     char_max_len
     char_ascii_only
     char_digits_only
-    char_regex -- will be available as of 0.4
 }}}
+Will be available as of release 0.4:
+{{{
+    char_regex
+}}}
+
+*Examples:*
+Constraint on value length:
+{{{
+    char_min_len: 2,
+    char_max_len: 40,
+    ...
+}}}
+
+Constraint on value type:
+{{{
+    char_ascii_only: TRUE,
+    ...
+}}}
+
+Constraint by regular expression; only consider URL-like values:
+{{{
+    char_regex: "^http://",
+    ...
+}}}
+While the char_regex constraint can be used to mimic all of the above (e.g. `"[0-9]+"` to mimic `char_digits_only`, it is most CPU intensive and far from being efficient.
