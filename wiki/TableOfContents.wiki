@@ -13,3 +13,5 @@
     * [RecoveryStepsPreparingCodeForRecovery Preparing the code for recovery]
     * [RecoveryStepsRecoveringTablespaceData Recovering tablespace data]
     * [RecoveryStepsImportDataIntoTable Importing tab-delimited data into table]
+  * Technical information
+    * [ConstraintsTypes Types of constraints]
