@@ -17,17 +17,17 @@ Following is a list of available constraints, per field type.
 
 === Type: INT ===
 
-INT allows for the following constraints:
-{{{
-    int_min_val
-    int_max_val
-}}}
-*Examples:*
-{{{
-    int_min_val: 1,
-    int_max_val: 12345,
-    ...
-}}}
+  INT allows for the following constraints:
+  {{{
+      int_min_val
+      int_max_val
+  }}}
+  *Examples:*
+  {{{
+      int_min_val: 1,
+      int_max_val: 12345,
+      ...
+  }}}
 
 === Type: INT UNSIGNED ===
 INT UNSIGNED allows for the following constraints:
