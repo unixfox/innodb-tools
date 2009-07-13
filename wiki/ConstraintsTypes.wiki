@@ -11,7 +11,7 @@ Following is a list of available constraints, per field type.
 === General ===
 
 * Any field can be set to nullable or non-nullable:
-  `can_be_null: TRUE|FALSE`
+`can_be_null: TRUE|FALSE`
 
 = Details =
 
