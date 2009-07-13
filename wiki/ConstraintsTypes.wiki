@@ -79,3 +79,14 @@ Following is a list of available constraints, per field type.
       ...
   }}}
   While the char_regex constraint can be used to mimic all of the above (e.g. `"[0-9]+"` to mimic `char_digits_only`, it is most CPU intensive and far from being efficient.
+
+=== Type: ENUM ===
+  * ENUM allows for the following constraints:
+  {{{
+      enum_values_count
+  }}}
+  * Examples: verify internal enum's INT representation is <= 7:
+  {{{
+      enum_values_count: 7,
+      ...
+  }}}
