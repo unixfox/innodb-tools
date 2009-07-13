@@ -16,7 +16,7 @@ Following is a list of available constraints, per field type.
     `has_limits: TRUE`
 
 === Type: INT ===
-  * INT allows for the following constraints:
+INT allows for the following constraints:
 {{{
     int_min_val
     int_max_val
@@ -29,7 +29,7 @@ Following is a list of available constraints, per field type.
 }}}
 
 === Type: INT UNSIGNED ===
-  * INT UNSIGNED allows for the following constraints:
+INT UNSIGNED allows for the following constraints:
 {{{
     uint_min_val
     uint_max_val
