@@ -12,6 +12,25 @@ Following is a list of available constraints, per field type.
 
   * Any field can be set to nullable or non-nullable:
     `can_be_null: TRUE|FALSE`
+  * Additional limits can be set with:
+    `has_limits: TRUE`
+
+=== Type: INT ===
+  * INT allows for the following constraints:
+    `int_min_val`
+    `int_max_val`
+    e.g.:
+    `int_min_val: 1`
+    `int_max_val: 12345`
+
+=== Type: INT UNSIGNED ===
+  * INT UNSIGNED allows for the following constraints:
+    `uint_min_val`
+    `uint_max_val`
+    e.g.:
+    `uint_min_val: 1`
+    `uint_max_val: 65535`
+
 
 = Details =
 
