@@ -1,6 +1,7 @@
 #summary Table of Contents
 [TableOfContents Table of Contents]
 
+  * [Changelog]
   * [InnodbRecoveryHowto InnoDB Tools HOWTO]
   * [InnodbRecoverySteps InnoDB Recovery Steps]
     * [RecoveryStepsTheDamage Sample damage]
