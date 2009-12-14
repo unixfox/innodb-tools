@@ -1,0 +1,24 @@
+#summary Changelog
+
+= Changelog =
+
+== Version 0.3 (April, 14, 2008) ==
+
+  * New (compact) DECIMAL format support is added.
+  * Strings library added to mysql-source for DECIMAL data type.
+  * Nullable fixed-size columns support is fixed.
+
+== Version 0.2 (April, 1, 2008) ==
+
+  * More MySQL data types added: DECIMAL, DATE, TIME
+  * CHAR data type handling improved in table definitions generator
+  * Indexes filtering added to page_parser
+  * 64-bit stat() support added to all tools
+  * Linux has no isnumber() function so we define our own implementation (pretty simple)
+  * Lots of fixes in create_defs.pl script - now it generates definitions which could recover your data in 80% cases w/o any changes.
+  * Min/max record size calculation fixed in constraints-based parser.
+  * Debug logging is much cleaner now. 
+
+== Version 0.1 (November, 26, 2007) ==
+
+  * Initial (but fully functional) release.
