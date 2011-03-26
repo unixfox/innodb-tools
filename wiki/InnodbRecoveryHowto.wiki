@@ -1,2 +1,2 @@
-#labels Featured,Phase-Deploy,Howto
+#labels Phase-Deploy,Howto
 This wiki page has moved to http://www.percona.com/docs/wiki/innodb-data-recovery-tool:start.  If you need help recovering lost data, Percona provides [http://www.percona.com/mysql-consulting/data-recovery/ MySQL and InnoDB data recovery services].
