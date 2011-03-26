@@ -1,18 +1,1 @@
-#summary Recovery steps: getting hold of your tablespace file(s)
-
-== Getting a copy of your tablespace file ==
-
-Waste no time. As soon as damage has been done, or as soon as you can react upon it, take a snapshot of your tablespace.
-
-Exactly what _is_ your tablespace depends on your settings.
-  * When using `innodb_file_per_table`, the answer is easy. It's the `.ibd` file.
-  * When using shared tablespace, this may be the `ibdata` file; some prefer to split it. The may be more tablespace files. If you're not sure, you're looking for `ibdata1`.
-
-=== Making the copy ===
-
-The tools work offline the MySQL server. They work directly on the tablespace file. It is therefore important to have a quite file, to which no one writes. Best to copy it somehow aside. There are a few options for that:
-  * Taking a snapshot (LVM; FS based; appliance based).
-  * Setting `innodb_fast_shutdown`; taking MySQL down; copying the tablespace file(s).
-  * Using Google Patches v2, `SET GLOBAL innodb_disallow_writes=1`, then copy tablespace file(s).
-
-Next: [RecoveryStepsSplittingSharedTablespace Splitting shared tablespace file]
+This wiki page has moved to http://www.percona.com/docs/wiki/innodb-data-recovery-tool:start.  If you need help recovering lost data, Percona provides [http://www.percona.com/mysql-consulting/data-recovery/ MySQL and InnoDB data recovery services].
