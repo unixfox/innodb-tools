@@ -1,18 +1,1 @@
-#summary Table of Contents
-[TableOfContents Table of Contents]
-
-  * [Changelog]
-  * [InnodbRecoveryHowto InnoDB Tools HOWTO]
-  * [InnodbRecoverySteps InnoDB Recovery Steps]
-    * [RecoveryStepsTheDamage Sample damage]
-    * [InnodbToolsSetup InnoDB Tools setup]
-    * [RecoveryStepsTableSchema Getting a hold on your table schema]
-    * [RecoveryStepsGetHoldOfTablespaceFile Getting hold of your tablespace file(s)]
-    * [RecoveryStepsSplittingSharedTablespace Splitting shared tablespace file]
-    * [RecoveryStepsKnowingWhereYourDataIsWithinTablespace Knowing where your data resides withing the tablespace]
-    * [RecoveryStepsIsolatingTableData Isolating table's tablespace data]
-    * [RecoveryStepsPreparingCodeForRecovery Preparing the code for recovery]
-    * [RecoveryStepsRecoveringTablespaceData Recovering tablespace data]
-    * [RecoveryStepsImportDataIntoTable Importing tab-delimited data into table]
-  * Technical information
-    * [ConstraintsTypes Types of constraints]
+This wiki page has moved to http://www.percona.com/docs/wiki/innodb-data-recovery-tool:start.  If you need help recovering lost data, Percona provides [http://www.percona.com/mysql-consulting/data-recovery/ MySQL and InnoDB data recovery services].
